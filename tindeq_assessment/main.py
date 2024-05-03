@@ -478,6 +478,7 @@ class CFT:
               cf=self.cf_critical_load
 
               french_grades={1:'1',2:'2',3:'2+',4:'3-',5:'3',6:'3+',7:'4',8:'4+',9:'5',10:'5+',11:'6a',12:'6a+',13:'6b',14:'6b+',15:'6c',16:'6c+',17:'7a',18:'7a+',19:'7b',20:'7b+',21:'7c',22:'7c+',23:'8a',24:'8a+',25:'8b',26:'8b+',27:'8c',28:'8c+',29:'9a',30:'9a+'}
+              us_grade={1:'vb',2:'vb',3:'vb',4:'vb',5:'vb',6:'vb+',7:'v0',8:'v0+',9:'v1',10:'v2',11:'v3',12:'v3+',13:'v4',14:'v4+',15:'v5',16:'v5+',17:'v6',18:'v7',19:'v8',20:'v9',21:'v9+',22:'v10',23:'v11',24:'v12',25:'v13',26:'v14',27:'v15',28:'v16',29:'v17',30:'v17+'}
               
               prediction='<strong>Predicted redpoint grades (french sport):</strong><br><ul>'
               prediction+= '<li>If one predictor is far below the others, you might improve by focusing training here</li>'
@@ -503,6 +504,8 @@ class CFT:
                    if gmin > 30:
                        gmin=30
                    prediction+= '<li>Max. strength: '+french_grades[gmin] +' - '+ french_grades[gmax]+'</li>'
+                   us_prediction+= '<li>Max. strength: '+us_grades[gmin] +' - '+ us_grades[gmax]+'</li>'
+
                                               
               if cf>0:        
                   # irca = cf/bw* 100*0.3 + 6
@@ -519,6 +522,8 @@ class CFT:
                   french_grades[gmin]
                   french_grades[gmax]
                   prediction+= '<li>Endurance: '+french_grades[gmin] +' - '+ french_grades[gmax]+'</li>'
+                  us_prediction+= '<li>Max. strength: '+us_grades[gmin] +' - '+ us_grades[gmax]+'</li>'
+
     
     
               if  self.rfd_right+self.rfd_left>0 :       
@@ -537,6 +542,7 @@ class CFT:
                 if gmin > 30:
                     gmin=30
                 prediction+= '<li>Contact strength: '+french_grades[gmin] +' - '+ french_grades[gmax]+'</li>'
+                us_prediction+= '<li>Max. strength: '+us_grades[gmin] +' - '+ us_grades[gmax]+'</li>'                
       
     
               self.div_results.text='<strong>Results:</strong> <br>\
@@ -550,7 +556,8 @@ class CFT:
     <li>RFD right: {:.2f} % kg/s</li></ul>\
     '.format( (self.max_left/bw)*100,(self.max_right/bw)*100,(self.cf_peak_load/bw)*100,(self.cf_critical_load/bw)*100,self.cf_percent,self.rfd_left,self.rfd_right) 
      
-              self.div_results.text+= prediction + '</ul>'            
+              self.div_results.text+= prediction + '</ul>'
+              self.div_results.text+= us_prediction + '</ul>'            
    
     #           else:              
     #               self.div_results.text='<strong>Results:</strong> <br>\
